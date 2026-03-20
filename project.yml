@@ -1,0 +1,37 @@
+name: LightTable
+options:
+  bundleIdPrefix: com.saiday
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+settings:
+  base:
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGN_IDENTITY: "-"
+    PRODUCT_NAME: "Light Table"
+targets:
+  LightTable:
+    type: application
+    platform: macOS
+    sources:
+      - LightTable
+    settings:
+      base:
+        INFOPLIST_FILE: LightTable/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: LightTable/LightTable.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: com.saiday.light-table
+    scheme:
+      testTargets:
+        - LightTableTests
+  LightTableTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - LightTableTests
+    dependencies:
+      - target: LightTable
+    settings:
+      base:
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Light Table.app/Contents/MacOS/Light Table"

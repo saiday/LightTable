@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A891A4AD7C64E4621167E6F /* LightTableApp.swift */; };
+		74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E203A455E8F3550ABD2FF /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9D7F8E30CD3248C1E675085F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0EEBD777A21F3D249C0EADC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25B8DC168DF6E9ABB011305A;
+			remoteInfo = LightTable;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1194B494B0CE7D59FA2E8639 /* LightTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BF202A72BA712ADE633053C /* LightTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C9E203A455E8F3550ABD2FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2E94049D27F8F4B60476612D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8A891A4AD7C64E4621167E6F /* LightTableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTableApp.swift; sourceTree = "<group>"; };
+		EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LightTable.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		03EBE33E42580621064E2D37 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2E94049D27F8F4B60476612D /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		39E0FC93832C695778BD101E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4BCCD1CA0B9E16EB2BCF955F /* LightTableTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LightTableTests;
+			sourceTree = "<group>";
+		};
+		5ECA8A18871A98E6493D2BA6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BF202A72BA712ADE633053C /* LightTable.app */,
+				1194B494B0CE7D59FA2E8639 /* LightTableTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79B7A7803470DA954F8877C9 /* LightTable */ = {
+			isa = PBXGroup;
+			children = (
+				2C9E203A455E8F3550ABD2FF /* ContentView.swift */,
+				EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */,
+				8A891A4AD7C64E4621167E6F /* LightTableApp.swift */,
+				39E0FC93832C695778BD101E /* Models */,
+				03EBE33E42580621064E2D37 /* Resources */,
+				F98646FDC12B4B4CD83E2FA4 /* Services */,
+			);
+			path = LightTable;
+			sourceTree = "<group>";
+		};
+		CBA9873E27C39776F32D7B55 = {
+			isa = PBXGroup;
+			children = (
+				79B7A7803470DA954F8877C9 /* LightTable */,
+				4BCCD1CA0B9E16EB2BCF955F /* LightTableTests */,
+				5ECA8A18871A98E6493D2BA6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F98646FDC12B4B4CD83E2FA4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		25B8DC168DF6E9ABB011305A /* LightTable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4ACEBC63C4AFB3448649D3E8 /* Build configuration list for PBXNativeTarget "LightTable" */;
+			buildPhases = (
+				DAB6474350BA640450069C82 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LightTable;
+			packageProductDependencies = (
+			);
+			productName = LightTable;
+			productReference = 1BF202A72BA712ADE633053C /* LightTable.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A1252DC4B2AE038653EC181D /* LightTableTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 781D38F071708F2E079984F0 /* Build configuration list for PBXNativeTarget "LightTableTests" */;
+			buildPhases = (
+				6E25863D2AA8B957873630AD /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				331803C995E6434A500778B7 /* PBXTargetDependency */,
+			);
+			name = LightTableTests;
+			packageProductDependencies = (
+			);
+			productName = LightTableTests;
+			productReference = 1194B494B0CE7D59FA2E8639 /* LightTableTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0EEBD777A21F3D249C0EADC1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 69042C7B3C2D875E040E769F /* Build configuration list for PBXProject "LightTable" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CBA9873E27C39776F32D7B55;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5ECA8A18871A98E6493D2BA6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				25B8DC168DF6E9ABB011305A /* LightTable */,
+				A1252DC4B2AE038653EC181D /* LightTableTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E25863D2AA8B957873630AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB6474350BA640450069C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */,
+				5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		331803C995E6434A500778B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25B8DC168DF6E9ABB011305A /* LightTable */;
+			targetProxy = 9D7F8E30CD3248C1E675085F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		09433A9F20C8FE3C2512BD4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.LightTableTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Light Table.app/Contents/MacOS/Light Table";
+			};
+			name = Debug;
+		};
+		1D74339296BAD8C2EC69A75E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "Light Table";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		2623C7B2243E85B4EDF50039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LightTable/LightTable.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LightTable/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.saiday.light-table";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3384887B25EB795CCAC3EE0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.LightTableTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Light Table.app/Contents/MacOS/Light Table";
+			};
+			name = Release;
+		};
+		55068823BCC6D7188E2D75CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Light Table";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9ACCAD8F782A810CD1024B3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LightTable/LightTable.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LightTable/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.saiday.light-table";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4ACEBC63C4AFB3448649D3E8 /* Build configuration list for PBXNativeTarget "LightTable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2623C7B2243E85B4EDF50039 /* Debug */,
+				9ACCAD8F782A810CD1024B3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		69042C7B3C2D875E040E769F /* Build configuration list for PBXProject "LightTable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55068823BCC6D7188E2D75CE /* Debug */,
+				1D74339296BAD8C2EC69A75E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		781D38F071708F2E079984F0 /* Build configuration list for PBXNativeTarget "LightTableTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09433A9F20C8FE3C2512BD4E /* Debug */,
+				3384887B25EB795CCAC3EE0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0EEBD777A21F3D249C0EADC1 /* Project object */;
+}
