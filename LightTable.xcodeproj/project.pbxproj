@@ -13,6 +13,7 @@
 		5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A891A4AD7C64E4621167E6F /* LightTableApp.swift */; };
 		60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950C685A000920A9931F07A /* AssetInfo.swift */; };
 		74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E203A455E8F3550ABD2FF /* ContentView.swift */; };
+		FEBAF308F22197DC83D54381 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		2C9E203A455E8F3550ABD2FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2E94049D27F8F4B60476612D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		46AFB0E7590D947495C4DA99 /* ScanResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResultTests.swift; sourceTree = "<group>"; };
+		7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		8A891A4AD7C64E4621167E6F /* LightTableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTableApp.swift; sourceTree = "<group>"; };
 		9A9649FB52468657C85D76A3 /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LightTable.entitlements; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		F98646FDC12B4B4CD83E2FA4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */,
 				185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */,
 			);
 			path = Services;
@@ -185,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEBAF308F22197DC83D54381 /* AlbumService.swift in Sources */,
 				60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */,
 				74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */,
 				5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */,
