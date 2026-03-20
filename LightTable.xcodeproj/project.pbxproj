@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		027C88BD1CA48480C7CD87A8 /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9649FB52468657C85D76A3 /* ScanResult.swift */; };
 		09D20BC48C23482270843036 /* ScanResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AFB0E7590D947495C4DA99 /* ScanResultTests.swift */; };
+		39065EE3606E31BD3A124931 /* PhotoLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */; };
 		5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A891A4AD7C64E4621167E6F /* LightTableApp.swift */; };
 		60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950C685A000920A9931F07A /* AssetInfo.swift */; };
 		74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E203A455E8F3550ABD2FF /* ContentView.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		1194B494B0CE7D59FA2E8639 /* LightTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryService.swift; sourceTree = "<group>"; };
 		1950C685A000920A9931F07A /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
 		1BF202A72BA712ADE633053C /* LightTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C9E203A455E8F3550ABD2FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		F98646FDC12B4B4CD83E2FA4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */,
 				74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */,
 				5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */,
+				39065EE3606E31BD3A124931 /* PhotoLibraryService.swift in Sources */,
 				027C88BD1CA48480C7CD87A8 /* ScanResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
