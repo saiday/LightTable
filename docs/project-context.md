@@ -25,8 +25,8 @@ Scans your Photos library, groups assets by size, and creates albums in Photos.a
 
 ## Key Technical Insights
 
-- `PHAsset` has no `fileSize` property — must use `PHAssetResource`
-- iCloud-only photo sizes are available from resource metadata without downloading the original
+- `PHAsset` has no public `fileSize` property — file size is accessed via KVC (`value(forKey: "fileSize")`) on `PHAssetResource`, which is a private/undocumented property (see design spec for details)
+- iCloud-only photo sizes are generally available from resource metadata without downloading the original, but some assets may return 0 (see design spec for handling)
 - Photos.app preserves insertion order as "Custom Order" in user-created albums — this is how we achieve size sorting in Photos.app
 - No public Apple API exists for reading iCloud storage usage
 
