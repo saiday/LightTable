@@ -146,24 +146,31 @@ struct ContentView: View {
     private func summarySection(_ result: ScanResult) -> some View {
         let summary = result.summary()
         return GroupBox("Library Summary") {
-            HStack(spacing: 30) {
-                statItem(
-                    label: "Photos",
-                    value: "\(summary.totalImages)",
-                    detail: summary.averageMegapixels > 0 ? "avg \(String(format: "%.1f", summary.averageMegapixels)) MP" : nil
-                )
-                Divider().frame(height: 40)
-                statItem(
-                    label: "Videos",
-                    value: "\(summary.totalVideos)",
-                    detail: summary.totalVideoDuration > 0 ? formatDuration(summary.totalVideoDuration) : nil
-                )
-                Divider().frame(height: 40)
-                statItem(
-                    label: "Total Size",
-                    value: formatBytes(summary.totalSize),
-                    detail: nil
-                )
+            VStack(spacing: 8) {
+                HStack(spacing: 30) {
+                    statItem(
+                        label: "Photos",
+                        value: "\(summary.totalImages)",
+                        detail: summary.averageMegapixels > 0 ? "avg \(String(format: "%.1f", summary.averageMegapixels)) MP" : nil
+                    )
+                    Divider().frame(height: 40)
+                    statItem(
+                        label: "Videos",
+                        value: "\(summary.totalVideos)",
+                        detail: summary.totalVideoDuration > 0 ? formatDuration(summary.totalVideoDuration) : nil
+                    )
+                    Divider().frame(height: 40)
+                    statItem(
+                        label: "Total Size",
+                        value: formatBytes(summary.totalSize),
+                        detail: nil
+                    )
+                }
+                if summary.unknownSizeCount > 0 {
+                    Text("\(summary.unknownSizeCount) assets with unknown size (skipped)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(8)
