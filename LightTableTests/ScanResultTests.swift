@@ -81,4 +81,70 @@ final class ScanResultTests: XCTestCase {
         let info = AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 5_000_000, creationDate: nil)
         XCTAssertEqual(info.megapixels, 0)
     }
+
+    func testSizeDistribution() {
+        let assets = [
+            AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 500_000, creationDate: nil),      // < 1MB
+            AssetInfo(localIdentifier: "2", mediaType: .image, fileSize: 3_000_000, creationDate: nil),     // 1-5MB
+            AssetInfo(localIdentifier: "3", mediaType: .image, fileSize: 8_000_000, creationDate: nil),     // 5-10MB
+            AssetInfo(localIdentifier: "4", mediaType: .video, fileSize: 25_000_000, creationDate: nil),    // 10-50MB
+            AssetInfo(localIdentifier: "5", mediaType: .video, fileSize: 75_000_000, creationDate: nil),    // 50-100MB
+            AssetInfo(localIdentifier: "6", mediaType: .video, fileSize: 200_000_000, creationDate: nil),   // 100MB+
+            AssetInfo(localIdentifier: "7", mediaType: .image, fileSize: 0, creationDate: nil),             // unknown - excluded
+        ]
+        let result = ScanResult(assets: assets)
+        let buckets = result.sizeDistribution()
+
+        XCTAssertEqual(buckets.count, 6)
+        XCTAssertEqual(buckets[0].label, "< 1 MB")
+        XCTAssertEqual(buckets[0].imageCount, 1)
+        XCTAssertEqual(buckets[0].videoCount, 0)
+        XCTAssertEqual(buckets[1].label, "1\u{2013}5 MB")  // en-dash
+        XCTAssertEqual(buckets[1].imageCount, 1)
+        XCTAssertEqual(buckets[2].label, "5\u{2013}10 MB")
+        XCTAssertEqual(buckets[2].imageCount, 1)
+        XCTAssertEqual(buckets[3].label, "10\u{2013}50 MB")
+        XCTAssertEqual(buckets[3].videoCount, 1)
+        XCTAssertEqual(buckets[4].label, "50\u{2013}100 MB")
+        XCTAssertEqual(buckets[4].videoCount, 1)
+        XCTAssertEqual(buckets[5].label, "100+ MB")
+        XCTAssertEqual(buckets[5].videoCount, 1)
+    }
+
+    func testSizeDistributionTotalSize() {
+        let assets = [
+            AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 3_000_000, creationDate: nil),
+            AssetInfo(localIdentifier: "2", mediaType: .video, fileSize: 4_000_000, creationDate: nil),
+        ]
+        let result = ScanResult(assets: assets)
+        let buckets = result.sizeDistribution()
+        let bucket1to5 = buckets.first(where: { $0.label == "1\u{2013}5 MB" })!
+        XCTAssertEqual(bucket1to5.imageTotalSize, 3_000_000)
+        XCTAssertEqual(bucket1to5.videoTotalSize, 4_000_000)
+    }
+
+    func testEnhancedSummary() {
+        let assets = [
+            AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 5_000_000, creationDate: nil, pixelWidth: 4032, pixelHeight: 3024),
+            AssetInfo(localIdentifier: "2", mediaType: .image, fileSize: 3_000_000, creationDate: nil, pixelWidth: 3024, pixelHeight: 2016),
+            AssetInfo(localIdentifier: "3", mediaType: .video, fileSize: 50_000_000, creationDate: nil, duration: 120),
+            AssetInfo(localIdentifier: "4", mediaType: .video, fileSize: 30_000_000, creationDate: nil, duration: 60),
+        ]
+        let result = ScanResult(assets: assets)
+        let summary = result.summary()
+
+        // Average megapixels: (12.19 + 6.10) / 2 = 9.145
+        XCTAssertEqual(summary.averageMegapixels, 9.1, accuracy: 0.2)
+        XCTAssertEqual(summary.totalVideoDuration, 180)
+    }
+
+    func testEnhancedSummaryNoImages() {
+        let assets = [
+            AssetInfo(localIdentifier: "1", mediaType: .video, fileSize: 50_000_000, creationDate: nil, duration: 120),
+        ]
+        let result = ScanResult(assets: assets)
+        let summary = result.summary()
+        XCTAssertEqual(summary.averageMegapixels, 0)
+        XCTAssertEqual(summary.totalVideoDuration, 120)
+    }
 }
