@@ -13,6 +13,7 @@
 		5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A891A4AD7C64E4621167E6F /* LightTableApp.swift */; };
 		60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950C685A000920A9931F07A /* AssetInfo.swift */; };
 		74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E203A455E8F3550ABD2FF /* ContentView.swift */; };
+		78E2C9C041E1189162EC1EE4 /* SizeDistributionChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */; };
 		FEBAF308F22197DC83D54381 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		8A891A4AD7C64E4621167E6F /* LightTableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTableApp.swift; sourceTree = "<group>"; };
 		9A9649FB52468657C85D76A3 /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
+		C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDistributionChart.swift; sourceTree = "<group>"; };
 		EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LightTable.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,8 +86,17 @@
 				39E0FC93832C695778BD101E /* Models */,
 				03EBE33E42580621064E2D37 /* Resources */,
 				F98646FDC12B4B4CD83E2FA4 /* Services */,
+				A50A32C24EC0B7A016B8CFEB /* Views */,
 			);
 			path = LightTable;
+			sourceTree = "<group>";
+		};
+		A50A32C24EC0B7A016B8CFEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CBA9873E27C39776F32D7B55 = {
@@ -194,6 +205,7 @@
 				5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */,
 				39065EE3606E31BD3A124931 /* PhotoLibraryService.swift in Sources */,
 				027C88BD1CA48480C7CD87A8 /* ScanResult.swift in Sources */,
+				78E2C9C041E1189162EC1EE4 /* SizeDistributionChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
