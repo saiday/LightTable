@@ -9,7 +9,6 @@ settings:
   base:
     ENABLE_HARDENED_RUNTIME: YES
     CODE_SIGN_IDENTITY: "-"
-    PRODUCT_NAME: "Light Table"
 targets:
   LightTable:
     type: application
@@ -18,6 +17,8 @@ targets:
       - LightTable
     settings:
       base:
+        PRODUCT_NAME: "Light Table"
+        PRODUCT_MODULE_NAME: LightTable
         INFOPLIST_FILE: LightTable/Resources/Info.plist
         CODE_SIGN_ENTITLEMENTS: LightTable/LightTable.entitlements
         PRODUCT_BUNDLE_IDENTIFIER: com.saiday.light-table
@@ -35,3 +36,4 @@ targets:
       base:
         BUNDLE_LOADER: "$(TEST_HOST)"
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Light Table.app/Contents/MacOS/Light Table"
+        GENERATE_INFOPLIST_FILE: YES
