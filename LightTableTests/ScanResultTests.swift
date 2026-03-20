@@ -64,4 +64,21 @@ final class ScanResultTests: XCTestCase {
         let above5MB = result.images(above: 5_000_000)
         XCTAssertEqual(above5MB.count, 1)
     }
+
+    func testAssetInfoDefaultValues() {
+        let info = AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 1000, creationDate: nil)
+        XCTAssertEqual(info.pixelWidth, 0)
+        XCTAssertEqual(info.pixelHeight, 0)
+        XCTAssertEqual(info.duration, 0)
+    }
+
+    func testAssetInfoMegapixels() {
+        let info = AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 5_000_000, creationDate: nil, pixelWidth: 4032, pixelHeight: 3024)
+        XCTAssertEqual(info.megapixels, 12.2, accuracy: 0.1)
+    }
+
+    func testAssetInfoMegapixelsZeroWhenNoDimensions() {
+        let info = AssetInfo(localIdentifier: "1", mediaType: .image, fileSize: 5_000_000, creationDate: nil)
+        XCTAssertEqual(info.megapixels, 0)
+    }
 }

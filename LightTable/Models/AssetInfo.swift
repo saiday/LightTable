@@ -11,10 +11,28 @@ struct AssetInfo: Identifiable {
     let mediaType: AssetMediaType
     let fileSize: Int64  // bytes, 0 means unknown
     let creationDate: Date?
+    let pixelWidth: Int
+    let pixelHeight: Int
+    let duration: TimeInterval  // seconds, 0 for images
 
     var id: String { localIdentifier }
 
     var hasKnownSize: Bool { fileSize > 0 }
+
+    var megapixels: Double {
+        guard pixelWidth > 0 && pixelHeight > 0 else { return 0 }
+        return Double(pixelWidth) * Double(pixelHeight) / 1_000_000.0
+    }
+
+    init(localIdentifier: String, mediaType: AssetMediaType, fileSize: Int64, creationDate: Date?, pixelWidth: Int = 0, pixelHeight: Int = 0, duration: TimeInterval = 0) {
+        self.localIdentifier = localIdentifier
+        self.mediaType = mediaType
+        self.fileSize = fileSize
+        self.creationDate = creationDate
+        self.pixelWidth = pixelWidth
+        self.pixelHeight = pixelHeight
+        self.duration = duration
+    }
 
     static func from(asset: PHAsset) -> AssetInfo {
         let resources = PHAssetResource.assetResources(for: asset)
@@ -44,7 +62,10 @@ struct AssetInfo: Identifiable {
             localIdentifier: asset.localIdentifier,
             mediaType: mediaType,
             fileSize: fileSize,
-            creationDate: asset.creationDate
+            creationDate: asset.creationDate,
+            pixelWidth: asset.pixelWidth,
+            pixelHeight: asset.pixelHeight,
+            duration: asset.duration
         )
     }
 }
