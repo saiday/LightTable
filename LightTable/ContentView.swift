@@ -42,10 +42,10 @@ struct ContentView: View {
             Spacer(minLength: 100)
             Image(systemName: "photo.on.rectangle.angled")
                 .font(.system(size: 48))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Theme.text3)
             Text("Sort your Photos library by size")
                 .font(.title3)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Theme.text2)
             Button("Scan Library") {
                 Task { await startScan() }
             }
@@ -55,6 +55,7 @@ struct ContentView: View {
             Spacer(minLength: 100)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Theme.bg)
     }
 
     // MARK: - Scrollable Content
@@ -93,55 +94,59 @@ struct ContentView: View {
     // MARK: - Empty Library
 
     private var emptyLibrarySection: some View {
-        GroupBox {
-            VStack(spacing: 12) {
-                Text("No photos or videos found")
-                    .font(.headline)
-                Text("Your Photos library appears to be empty.")
-                    .foregroundStyle(.secondary)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(8)
+        VStack(spacing: 12) {
+            Text("No photos or videos found")
+                .font(.headline)
+                .foregroundStyle(Theme.text1)
+            Text("Your Photos library appears to be empty.")
+                .foregroundStyle(Theme.text2)
         }
+        .frame(maxWidth: .infinity)
+        .padding(20)
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
     }
 
     // MARK: - Error
 
     private func errorSection(_ message: String) -> some View {
-        GroupBox {
-            VStack(spacing: 8) {
-                Label(message, systemImage: "exclamationmark.triangle")
-                    .foregroundStyle(.red)
-                    .multilineTextAlignment(.center)
-                Button("Dismiss") {
-                    errorMessage = nil
-                }
-                .buttonStyle(.borderless)
+        VStack(spacing: 8) {
+            Label(message, systemImage: "exclamationmark.triangle")
+                .foregroundStyle(.red)
+                .multilineTextAlignment(.center)
+            Button("Dismiss") {
+                errorMessage = nil
             }
-            .frame(maxWidth: .infinity)
-            .padding(8)
+            .buttonStyle(.borderless)
         }
+        .frame(maxWidth: .infinity)
+        .padding(20)
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
     }
 
     // MARK: - Scanning
 
     private var scanningSection: some View {
-        GroupBox {
-            VStack(spacing: 12) {
-                ProgressView()
-                    .controlSize(.large)
-                if let progress = photoService.scanProgress {
-                    Text("Scanning \(progress.completed) / \(progress.total)")
-                        .monospacedDigit()
-                        .foregroundStyle(.secondary)
-                } else {
-                    Text("Starting scan...")
-                        .foregroundStyle(.secondary)
-                }
+        VStack(spacing: 12) {
+            ProgressView()
+                .controlSize(.large)
+            if let progress = photoService.scanProgress {
+                Text("Scanning \(progress.completed) / \(progress.total)")
+                    .monospacedDigit()
+                    .foregroundStyle(Theme.text2)
+            } else {
+                Text("Starting scan...")
+                    .foregroundStyle(Theme.text2)
             }
-            .frame(maxWidth: .infinity)
-            .padding(8)
         }
+        .frame(maxWidth: .infinity)
+        .padding(20)
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
     }
 
     // MARK: - Hero Stat
@@ -297,37 +302,38 @@ struct ContentView: View {
     // MARK: - Success
 
     private var successSection: some View {
-        GroupBox {
-            VStack(alignment: .leading, spacing: 12) {
-                Label("Albums created successfully!", systemImage: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                    .font(.headline)
+        VStack(alignment: .leading, spacing: 12) {
+            Label("Albums created successfully!", systemImage: "checkmark.circle.fill")
+                .foregroundStyle(.green)
+                .font(.headline)
 
-                if !albumService.createdAlbumNames.isEmpty {
-                    VStack(alignment: .leading, spacing: 4) {
-                        ForEach(albumService.createdAlbumNames, id: \.self) { name in
-                            Label(name, systemImage: "photo.on.rectangle")
-                                .foregroundStyle(.primary)
-                        }
+            if !albumService.createdAlbumNames.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(albumService.createdAlbumNames, id: \.self) { name in
+                        Label(name, systemImage: "photo.on.rectangle")
+                            .foregroundStyle(Theme.text1)
                     }
-                }
-
-                Divider()
-
-                HStack {
-                    Text("Find your albums in Photos \u{2192} Sidebar \u{2192} My Albums (scroll to bottom). You can drag to reorder.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Button("Open Photos") {
-                        NSWorkspace.shared.open(URL(string: "photos://")!)
-                    }
-                    .buttonStyle(.bordered)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(8)
+
+            Divider().background(Theme.border)
+
+            HStack {
+                Text("Find your albums in Photos \u{2192} Sidebar \u{2192} My Albums (scroll to bottom). You can drag to reorder.")
+                    .font(.caption)
+                    .foregroundStyle(Theme.text2)
+                Spacer()
+                Button("Open Photos") {
+                    NSWorkspace.shared.open(URL(string: "photos://")!)
+                }
+                .buttonStyle(.bordered)
+            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
     }
 
     // MARK: - Actions
