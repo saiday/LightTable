@@ -16,3 +16,6 @@ build/
 # SwiftPM
 .build/
 .swiftpm/
+
+# Worktrees
+.worktrees/
