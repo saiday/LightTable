@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		027C88BD1CA48480C7CD87A8 /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9649FB52468657C85D76A3 /* ScanResult.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* Theme.swift */; };
 		09D20BC48C23482270843036 /* ScanResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AFB0E7590D947495C4DA99 /* ScanResultTests.swift */; };
 		39065EE3606E31BD3A124931 /* PhotoLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */; };
 		5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A891A4AD7C64E4621167E6F /* LightTableApp.swift */; };
@@ -38,6 +39,7 @@
 		7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		8A891A4AD7C64E4621167E6F /* LightTableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTableApp.swift; sourceTree = "<group>"; };
 		9A9649FB52468657C85D76A3 /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDistributionChart.swift; sourceTree = "<group>"; };
 		EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LightTable.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 				2C9E203A455E8F3550ABD2FF /* ContentView.swift */,
 				EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */,
 				8A891A4AD7C64E4621167E6F /* LightTableApp.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* Theme.swift */,
 				39E0FC93832C695778BD101E /* Models */,
 				03EBE33E42580621064E2D37 /* Resources */,
 				F98646FDC12B4B4CD83E2FA4 /* Services */,
@@ -206,6 +209,7 @@
 				39065EE3606E31BD3A124931 /* PhotoLibraryService.swift in Sources */,
 				027C88BD1CA48480C7CD87A8 /* ScanResult.swift in Sources */,
 				78E2C9C041E1189162EC1EE4 /* SizeDistributionChart.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
