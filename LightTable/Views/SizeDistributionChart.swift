@@ -9,6 +9,7 @@ enum ChartMetric: String, CaseIterable {
 struct SizeDistributionChart: View {
     let buckets: [SizeBucket]
     @State private var chartMetric: ChartMetric = .count
+    @State private var animateChart = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -34,7 +35,7 @@ struct SizeDistributionChart: View {
                 ForEach(chartDataPoints) { point in
                     BarMark(
                         x: .value("Size Range", point.bucket),
-                        y: .value(chartMetric == .count ? "Assets" : "Size", point.value)
+                        y: .value(chartMetric == .count ? "Assets" : "Size", animateChart ? point.value : 0)
                     )
                     .foregroundStyle(by: .value("Type", point.mediaType))
                 }
@@ -78,6 +79,13 @@ struct SizeDistributionChart: View {
                 RoundedRectangle(cornerRadius: 14)
                     .strokeBorder(Theme.border, lineWidth: 1)
             )
+            .animation(.default, value: chartMetric)
+            .animation(.default, value: animateChart)
+            .onAppear {
+                withAnimation(.default) {
+                    animateChart = true
+                }
+            }
         }
     }
 

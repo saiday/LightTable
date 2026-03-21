@@ -6,6 +6,7 @@ struct ContentView: View {
     @State private var categories: [AlbumCategory] = []
     @State private var errorMessage: String?
     @State private var showSuccess = false
+    @State private var showContent = false
 
     private var hasResults: Bool {
         photoService.scanResult != nil
@@ -19,6 +20,7 @@ struct ContentView: View {
                 scrollableContent
             }
         }
+        .animation(.default, value: hasResults)
         .frame(minWidth: 700, minHeight: 600)
         .navigationTitle("Light Table")
         .toolbar {
@@ -75,10 +77,26 @@ struct ContentView: View {
                     if result.assets.isEmpty {
                         emptyLibrarySection
                     } else {
-                        heroSection(result.summary())
-                        statPillsSection(result.summary())
+                        let summary = result.summary()
+                        heroSection(summary)
+                            .opacity(showContent ? 1 : 0)
+                            .offset(y: showContent ? 0 : 10)
+                            .animation(.default, value: showContent)
+
+                        statPillsSection(summary)
+                            .opacity(showContent ? 1 : 0)
+                            .offset(y: showContent ? 0 : 10)
+                            .animation(.default.delay(0.05), value: showContent)
+
                         chartSection(result)
+                            .opacity(showContent ? 1 : 0)
+                            .offset(y: showContent ? 0 : 10)
+                            .animation(.default.delay(0.1), value: showContent)
+
                         albumSection
+                            .opacity(showContent ? 1 : 0)
+                            .offset(y: showContent ? 0 : 10)
+                            .animation(.default.delay(0.15), value: showContent)
                     }
                 }
 
@@ -86,7 +104,7 @@ struct ContentView: View {
                     successSection
                 }
             }
-            .padding(24)
+            .padding(EdgeInsets(top: 28, leading: 32, bottom: 32, trailing: 32))
         }
         .background(Theme.bg)
     }
@@ -341,12 +359,14 @@ struct ContentView: View {
     private func startScan() async {
         errorMessage = nil
         showSuccess = false
+        showContent = false
         do {
             try await photoService.scan()
             if let result = photoService.scanResult {
                 withAnimation(.default) {
                     categories = result.albumCategories()
                 }
+                showContent = true
             }
         } catch {
             errorMessage = error.localizedDescription
