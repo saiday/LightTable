@@ -12,25 +12,25 @@ struct ContentView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if !hasResults && !photoService.isScanning && errorMessage == nil {
-                    welcomeView
-                } else {
-                    scrollableContent
-                }
+        Group {
+            if !hasResults && !photoService.isScanning && errorMessage == nil {
+                welcomeView
+            } else {
+                scrollableContent
             }
-            .navigationTitle("Light Table")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        Task { await startScan() }
-                    } label: {
-                        Label(hasResults ? "Scan Again" : "Scan Library", systemImage: "arrow.clockwise")
-                    }
-                    .disabled(photoService.isScanning)
-                    .help(hasResults ? "Re-scan your Photos library" : "Scan your Photos library")
+        }
+        .frame(minWidth: 700, minHeight: 600)
+        .navigationTitle("Light Table")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    Task { await startScan() }
+                } label: {
+                    Label(hasResults ? "Scan Again" : "Scan Library", systemImage: "arrow.clockwise")
                 }
+                .keyboardShortcut("r", modifiers: .command)
+                .disabled(photoService.isScanning)
+                .help(hasResults ? "Re-scan your Photos library" : "Scan your Photos library")
             }
         }
     }
@@ -39,7 +39,7 @@ struct ContentView: View {
 
     private var welcomeView: some View {
         VStack(spacing: 16) {
-            Spacer()
+            Spacer(minLength: 100)
             Image(systemName: "photo.on.rectangle.angled")
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
@@ -49,9 +49,10 @@ struct ContentView: View {
             Button("Scan Library") {
                 Task { await startScan() }
             }
+            .keyboardShortcut(.defaultAction)
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
-            Spacer()
+            Spacer(minLength: 100)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -60,7 +61,7 @@ struct ContentView: View {
 
     private var scrollableContent: some View {
         ScrollView {
-            VStack(spacing: 16) {
+            VStack(spacing: 24) {
                 if let error = errorMessage {
                     errorSection(error)
                 }
@@ -73,7 +74,8 @@ struct ContentView: View {
                     if result.assets.isEmpty {
                         emptyLibrarySection
                     } else {
-                        summarySection(result)
+                        heroSection(result.summary())
+                        statPillsSection(result.summary())
                         chartSection(result)
                         albumSection
                     }
@@ -83,8 +85,9 @@ struct ContentView: View {
                     successSection
                 }
             }
-            .padding(20)
+            .padding(24)
         }
+        .background(Theme.bg)
     }
 
     // MARK: - Empty Library
@@ -141,102 +144,133 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - Summary
+    // MARK: - Hero Stat
 
-    private func summarySection(_ result: ScanResult) -> some View {
-        let summary = result.summary()
-        return GroupBox("Library Summary") {
-            VStack(spacing: 8) {
-                HStack(spacing: 30) {
-                    statItem(
-                        label: "Photos",
-                        value: "\(summary.totalImages)",
-                        detail: summary.averageMegapixels > 0 ? "avg \(String(format: "%.1f", summary.averageMegapixels)) MP" : nil
-                    )
-                    Divider().frame(height: 40)
-                    statItem(
-                        label: "Videos",
-                        value: "\(summary.totalVideos)",
-                        detail: summary.totalVideoDuration > 0 ? formatDuration(summary.totalVideoDuration) : nil
-                    )
-                    Divider().frame(height: 40)
-                    statItem(
-                        label: "Total Size",
-                        value: formatBytes(summary.totalSize),
-                        detail: nil
-                    )
-                }
-                if summary.unknownSizeCount > 0 {
-                    Text("\(summary.unknownSizeCount) assets with unknown size (skipped)")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+    private func heroSection(_ summary: ScanSummary) -> some View {
+        let sizeString = formatBytes(summary.totalSize)
+        let parts = sizeString.split(separator: " ", maxSplits: 1)
+        let number = String(parts.first ?? "0")
+        let unit = parts.count > 1 ? String(parts.last!) : ""
+
+        return VStack(spacing: 4) {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(number)
+                    .font(.system(size: 52, weight: .heavy))
+                    .tracking(-2.5)
+                Text(unit)
+                    .font(.system(size: 28, weight: .heavy))
             }
-            .frame(maxWidth: .infinity)
-            .padding(8)
+            .foregroundStyle(Theme.text1)
+            .monospacedDigit()
+            Text("LIBRARY SIZE")
+                .font(.system(size: 11))
+                .tracking(1.5)
+                .foregroundStyle(Theme.text3)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 8)
+    }
+
+    // MARK: - Stat Pills
+
+    private func statPillsSection(_ summary: ScanSummary) -> some View {
+        HStack(spacing: 12) {
+            statPill(
+                value: "\(summary.totalImages)",
+                label: "PHOTOS",
+                detail: summary.averageMegapixels > 0 ? "avg \(String(format: "%.1f", summary.averageMegapixels)) MP" : nil,
+                accentColor: Theme.helvetiaBlue
+            )
+            statPill(
+                value: "\(summary.totalVideos)",
+                label: "VIDEOS",
+                detail: summary.totalVideoDuration > 0 ? "\(formatDuration(summary.totalVideoDuration)) total" : nil,
+                accentColor: Theme.dullCitrine
+            )
         }
     }
 
-    private func statItem(label: String, value: String, detail: String?) -> some View {
-        VStack(spacing: 2) {
+    private func statPill(value: String, label: String, detail: String?, accentColor: Color) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
             Text(value)
-                .font(.title2.bold())
+                .font(.system(size: 26, weight: .bold))
                 .monospacedDigit()
+                .foregroundStyle(Theme.text1)
             Text(label)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            if let detail = detail {
+                .font(.system(size: 11))
+                .tracking(0.5)
+                .foregroundStyle(Theme.text2)
+            if let detail {
                 Text(detail)
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Theme.text3)
+                    .padding(.top, 2)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(top: 16, leading: 18, bottom: 16, trailing: 18))
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(alignment: .top) {
+            accentColor.frame(height: 2)
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 14, topTrailingRadius: 14))
+        }
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .strokeBorder(Theme.border, lineWidth: 1)
+        )
     }
 
     // MARK: - Chart
 
     private func chartSection(_ result: ScanResult) -> some View {
-        GroupBox {
-            SizeDistributionChart(buckets: result.sizeDistribution())
-                .padding(8)
-        }
+        SizeDistributionChart(buckets: result.sizeDistribution())
     }
 
     // MARK: - Album Selection
 
     private var albumSection: some View {
-        GroupBox("Albums to Create") {
-            VStack(alignment: .leading, spacing: 8) {
-                ForEach($categories) { $category in
-                    HStack {
-                        Toggle(isOn: $category.isSelected) {
-                            Text(category.name)
+        VStack(spacing: 12) {
+            GroupBox("Albums to Create") {
+                VStack(spacing: 0) {
+                    ForEach($categories) { $category in
+                        HStack {
+                            Toggle(isOn: $category.isSelected) {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(category.name)
+                                    Text("\(category.assets.count) items \u{00B7} \(formatBytes(category.totalSize))")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                        .monospacedDigit()
+                                }
+                            }
+                            .disabled(category.assets.isEmpty)
                         }
-                        .disabled(category.assets.isEmpty)
-                        Spacer()
-                        Text("\(category.assets.count) items (\(formatBytes(category.totalSize)))")
-                            .foregroundStyle(.secondary)
-                            .monospacedDigit()
-                    }
-                }
-
-                HStack {
-                    Spacer()
-                    Button {
-                        Task { await createAlbums() }
-                    } label: {
-                        if albumService.isCreating {
-                            ProgressView()
-                                .controlSize(.small)
-                        } else {
-                            Text("Create Albums")
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 4)
+                        if category.id != categories.last?.id {
+                            Divider()
                         }
                     }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(albumService.isCreating || !categories.contains(where: { $0.isSelected && !$0.assets.isEmpty }))
                 }
+                .padding(8)
             }
-            .padding(8)
+
+            HStack {
+                Spacer()
+                Button {
+                    Task { await createAlbums() }
+                } label: {
+                    if albumService.isCreating {
+                        ProgressView()
+                            .controlSize(.small)
+                    } else {
+                        Text("Create Albums")
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(albumService.isCreating || !categories.contains(where: { $0.isSelected && !$0.assets.isEmpty }))
+            }
         }
     }
 
@@ -260,22 +294,10 @@ struct ContentView: View {
 
                 Divider()
 
-                VStack(alignment: .leading, spacing: 6) {
-                    Label("Where to find your albums:", systemImage: "info.circle")
-                        .font(.subheadline.bold())
-
-                    Text("macOS: Photos \u{2192} Sidebar \u{2192} My Albums \u{2192} scroll to bottom")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text("iOS: Photos \u{2192} Albums tab \u{2192} My Albums \u{2192} scroll to bottom")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text("You can drag albums to reorder them in Photos.")
-                        .font(.caption)
-                        .foregroundStyle(.tertiary)
-                }
-
                 HStack {
+                    Text("Find your albums in Photos \u{2192} Sidebar \u{2192} My Albums (scroll to bottom). You can drag to reorder.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                     Spacer()
                     Button("Open Photos") {
                         NSWorkspace.shared.open(URL(string: "photos://")!)
@@ -296,7 +318,9 @@ struct ContentView: View {
         do {
             try await photoService.scan()
             if let result = photoService.scanResult {
-                categories = result.albumCategories()
+                withAnimation(.default) {
+                    categories = result.albumCategories()
+                }
             }
         } catch {
             errorMessage = error.localizedDescription
@@ -307,7 +331,9 @@ struct ContentView: View {
         showSuccess = false
         do {
             try await albumService.createAlbums(categories: categories)
-            showSuccess = true
+            withAnimation(.default) {
+                showSuccess = true
+            }
         } catch {
             errorMessage = error.localizedDescription
         }
