@@ -12,9 +12,12 @@ struct SizeDistributionChart: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            // Section header
             HStack {
-                Text("Size Distribution")
-                    .font(.headline)
+                Text("SIZE DISTRIBUTION")
+                    .font(.system(size: 13, weight: .semibold))
+                    .tracking(0.5)
+                    .foregroundStyle(Theme.text2)
                 Spacer()
                 Picker("Metric", selection: $chartMetric) {
                     ForEach(ChartMetric.allCases, id: \.self) { metric in
@@ -26,6 +29,7 @@ struct SizeDistributionChart: View {
                 .frame(width: 160)
             }
 
+            // Chart container
             Chart {
                 ForEach(chartDataPoints) { point in
                     BarMark(
@@ -36,24 +40,44 @@ struct SizeDistributionChart: View {
                 }
             }
             .chartForegroundStyleScale([
-                "Photos": Color.blue,
-                "Videos": Color.purple,
+                "Photos": Theme.helvetiaBlue,
+                "Videos": Theme.dullCitrine,
             ])
             .chartYAxis {
-                if chartMetric == .storage {
-                    AxisMarks { value in
-                        AxisGridLine()
-                        AxisValueLabel {
+                AxisMarks { value in
+                    AxisValueLabel {
+                        if chartMetric == .storage {
                             if let bytes = value.as(Double.self) {
                                 Text(formatBytes(Int64(bytes)))
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(Theme.text3)
+                            }
+                        } else {
+                            if let count = value.as(Double.self) {
+                                Text(formatCount(count))
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(Theme.text3)
                             }
                         }
                     }
-                } else {
-                    AxisMarks()
                 }
             }
+            .chartXAxis {
+                AxisMarks { _ in
+                    AxisValueLabel()
+                        .font(.system(size: 10))
+                        .foregroundStyle(Theme.text3)
+                }
+            }
+            .chartLegend(position: .bottom, alignment: .leading, spacing: 12)
             .frame(height: 200)
+            .padding(20)
+            .background(Theme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .overlay(
+                RoundedRectangle(cornerRadius: 14)
+                    .strokeBorder(Theme.border, lineWidth: 1)
+            )
         }
     }
 
@@ -80,6 +104,16 @@ struct SizeDistributionChart: View {
         let formatter = ByteCountFormatter()
         formatter.countStyle = .file
         return formatter.string(fromByteCount: bytes)
+    }
+
+    private func formatCount(_ value: Double) -> String {
+        let intValue = Int(value)
+        if intValue >= 1_000_000 {
+            return "\(intValue / 1_000_000)M"
+        } else if intValue >= 1_000 {
+            return "\(intValue / 1_000)K"
+        }
+        return "\(intValue)"
     }
 }
 
