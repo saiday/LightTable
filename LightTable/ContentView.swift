@@ -6,6 +6,7 @@ struct ContentView: View {
     @State private var categories: [AlbumCategory] = []
     @State private var errorMessage: String?
     @State private var showSuccess = false
+    @State private var showCompressionInfo = false
 
     private var hasResults: Bool {
         photoService.scanResult != nil
@@ -32,6 +33,18 @@ struct ContentView: View {
                 .disabled(photoService.isScanning)
                 .help(hasResults ? "Re-scan your Photos library" : "Scan your Photos library")
             }
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showCompressionInfo = true
+                } label: {
+                    Label("Compression Info", systemImage: "info.circle")
+                }
+                .help("Learn how to compress large photos")
+                .disabled(!hasResults)
+            }
+        }
+        .sheet(isPresented: $showCompressionInfo) {
+            CompressionInfoView()
         }
     }
 
