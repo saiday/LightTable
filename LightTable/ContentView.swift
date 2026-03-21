@@ -230,31 +230,51 @@ struct ContentView: View {
     // MARK: - Album Selection
 
     private var albumSection: some View {
-        VStack(spacing: 12) {
-            GroupBox("Albums to Create") {
-                VStack(spacing: 0) {
-                    ForEach($categories) { $category in
-                        HStack {
-                            Toggle(isOn: $category.isSelected) {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(category.name)
-                                    Text("\(category.assets.count) items \u{00B7} \(formatBytes(category.totalSize))")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                        .monospacedDigit()
-                                }
-                            }
+        VStack(alignment: .leading, spacing: 12) {
+            Text("ALBUMS TO CREATE")
+                .font(.system(size: 13, weight: .semibold))
+                .tracking(0.5)
+                .foregroundStyle(Theme.text2)
+
+            VStack(spacing: 0) {
+                ForEach($categories) { $category in
+                    HStack(spacing: 12) {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(category.name.contains("Video") ? Theme.dullCitrine : Theme.helvetiaBlue)
+                            .frame(width: 3, height: 28)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(category.name)
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(Theme.text1)
+                            Text("\(category.assets.count) items \u{00B7} \(formatBytes(category.totalSize))")
+                                .font(.system(size: 11))
+                                .foregroundStyle(Theme.text3)
+                                .monospacedDigit()
+                        }
+
+                        Spacer()
+
+                        Toggle("", isOn: $category.isSelected)
+                            .labelsHidden()
                             .disabled(category.assets.isEmpty)
-                        }
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 4)
-                        if category.id != categories.last?.id {
-                            Divider()
-                        }
+                    }
+                    .padding(.vertical, 14)
+                    .padding(.horizontal, 18)
+
+                    if category.id != categories.last?.id {
+                        Divider()
+                            .background(Color.white.opacity(0.04))
+                            .padding(.leading, 33)
                     }
                 }
-                .padding(8)
             }
+            .background(Theme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .overlay(
+                RoundedRectangle(cornerRadius: 14)
+                    .strokeBorder(Theme.border, lineWidth: 1)
+            )
 
             HStack {
                 Spacer()
