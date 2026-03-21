@@ -97,6 +97,14 @@ The current Light Table UI uses plain GroupBox containers, default system chart 
 - Container corner radius: 14pt
 - Album row padding: 14pt vertical, 18pt horizontal
 
+## Animations
+
+Use SwiftUI default animations (`.default`) throughout. No custom spring/timing curves.
+
+- **Results page transition**: When scan results appear (replacing the welcome view), animate the transition with `.animation(.default)`
+- **Chart bars**: Bars animate in from zero height when the chart first appears and when toggling between Count/Storage
+- **Section stagger**: Hero, stat pills, chart, and albums sections fade/slide in with a subtle stagger using `.animation(.default.delay(...))`on each section
+
 ## Files to Modify
 
 - `LightTable/ContentView.swift` — main layout restructure, color definitions, dark theme enforcement
@@ -113,3 +121,6 @@ The current Light Table UI uses plain GroupBox containers, default system chart 
 6. Verify stat pills have colored top accent lines
 7. Verify album rows have colored left accent lines
 8. Verify no grid lines on chart
+9. Verify chart bars animate from zero when results first appear
+10. Verify sections stagger in on results page transition
+11. Verify chart bars animate when toggling Count/Storage
