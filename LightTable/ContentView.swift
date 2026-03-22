@@ -40,11 +40,11 @@ struct ContentView: View {
                     Label("Compression Info", systemImage: "info.circle")
                 }
                 .help("Learn how to compress large photos")
-                .disabled(!hasResults)
+                .disabled(!showSuccess)
             }
         }
         .sheet(isPresented: $showCompressionInfo) {
-            CompressionInfoView()
+            CompressionInfoView(createdAlbumNames: albumService.createdAlbumNames)
         }
     }
 
@@ -95,9 +95,6 @@ struct ContentView: View {
                     }
                 }
 
-                if showSuccess {
-                    successSection
-                }
             }
             .padding(24)
         }
@@ -312,43 +309,6 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - Success
-
-    private var successSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Label("Albums created successfully!", systemImage: "checkmark.circle.fill")
-                .foregroundStyle(.green)
-                .font(.headline)
-
-            if !albumService.createdAlbumNames.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    ForEach(albumService.createdAlbumNames, id: \.self) { name in
-                        Label(name, systemImage: "photo.on.rectangle")
-                            .foregroundStyle(Theme.text1)
-                    }
-                }
-            }
-
-            Divider().background(Theme.border)
-
-            HStack {
-                Text("Find your albums in Photos \u{2192} Sidebar \u{2192} My Albums (scroll to bottom). You can drag to reorder.")
-                    .font(.caption)
-                    .foregroundStyle(Theme.text2)
-                Spacer()
-                Button("Open Photos") {
-                    NSWorkspace.shared.open(URL(string: "photos://")!)
-                }
-                .buttonStyle(.bordered)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(20)
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
-    }
-
     // MARK: - Actions
 
     private func startScan() async {
@@ -370,9 +330,8 @@ struct ContentView: View {
         showSuccess = false
         do {
             try await albumService.createAlbums(categories: categories)
-            withAnimation(.default) {
-                showSuccess = true
-            }
+            showSuccess = true
+            showCompressionInfo = true
         } catch {
             errorMessage = error.localizedDescription
         }

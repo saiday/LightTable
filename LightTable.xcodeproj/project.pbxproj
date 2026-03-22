@@ -15,6 +15,7 @@
 		60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950C685A000920A9931F07A /* AssetInfo.swift */; };
 		74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E203A455E8F3550ABD2FF /* ContentView.swift */; };
 		78E2C9C041E1189162EC1EE4 /* SizeDistributionChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */; };
+		B8185FF1A38D1702EC6B5F4E /* LightTableCompress.shortcut in Resources */ = {isa = PBXBuildFile; fileRef = 0E46AE452F0A11E32D839D7F /* LightTableCompress.shortcut */; };
 		F06D2143151002A3351FEE7D /* CompressionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20FC29E1E97C2578C0BCE16 /* CompressionInfoView.swift */; };
 		FEBAF308F22197DC83D54381 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E46AE452F0A11E32D839D7F /* LightTableCompress.shortcut */ = {isa = PBXFileReference; path = LightTableCompress.shortcut; sourceTree = "<group>"; };
 		1194B494B0CE7D59FA2E8639 /* LightTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryService.swift; sourceTree = "<group>"; };
 		1950C685A000920A9931F07A /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				2E94049D27F8F4B60476612D /* Info.plist */,
+				0E46AE452F0A11E32D839D7F /* LightTableCompress.shortcut */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 			buildConfigurationList = 4ACEBC63C4AFB3448649D3E8 /* Build configuration list for PBXNativeTarget "LightTable" */;
 			buildPhases = (
 				DAB6474350BA640450069C82 /* Sources */,
+				5FB68A2116B1DCF8E64EC117 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -191,6 +195,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5FB68A2116B1DCF8E64EC117 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8185FF1A38D1702EC6B5F4E /* LightTableCompress.shortcut in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6E25863D2AA8B957873630AD /* Sources */ = {
