@@ -55,10 +55,10 @@ struct CompressionInfoView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Don't want to delete? Compress instead.")
                 .font(.headline)
-            Text("Our Shortcut converts photos to HEIF at up to 24 MP — smaller files, nearly identical quality. Originals go to Recently Deleted for 30 days.")
+            Text("Our Shortcut converts photos to JPEG — visually indistinguishable, significantly smaller. You'll see the compression ratio before confirming. Originals go to Recently Deleted for 30 days.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("Note: Compressed photos may appear at today's date in your timeline.")
+            Text("Note: Compressed photos from the album will show today as the date taken in your timeline.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
