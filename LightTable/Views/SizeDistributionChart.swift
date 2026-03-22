@@ -17,7 +17,7 @@ struct SizeDistributionChart: View {
             HStack {
                 Text("SIZE DISTRIBUTION")
                     .font(.system(size: 13, weight: .semibold))
-                    .tracking(0.5)
+                    .tracking(0.8)
                     .foregroundStyle(Theme.text2)
                 Spacer()
                 Picker("Metric", selection: $chartMetric) {
@@ -30,7 +30,7 @@ struct SizeDistributionChart: View {
                 .frame(width: 160)
             }
 
-            // Chart container
+            // Chart
             Chart {
                 ForEach(chartDataPoints) { point in
                     BarMark(
@@ -38,11 +38,21 @@ struct SizeDistributionChart: View {
                         y: .value(chartMetric == .count ? "Assets" : "Size", animateChart ? point.value : 0)
                     )
                     .foregroundStyle(by: .value("Type", point.mediaType))
+                    .annotation(position: .top) {
+                        if point.mediaType == "Videos" {
+                            let total = bucketTotals[point.bucket] ?? 0
+                            if total > 0 {
+                                Text(chartMetric == .count ? formatCount(total) : formatBytes(Int64(total)))
+                                    .font(.system(size: 10, weight: .medium))
+                                    .foregroundStyle(Theme.text3)
+                            }
+                        }
+                    }
                 }
             }
             .chartForegroundStyleScale([
-                "Photos": Theme.helvetiaBlue,
-                "Videos": Theme.dullCitrine,
+                "Photos": Theme.eosinePink,
+                "Videos": Theme.neutralGray,
             ])
             .chartYAxis {
                 AxisMarks { value in
@@ -50,13 +60,13 @@ struct SizeDistributionChart: View {
                         if chartMetric == .storage {
                             if let bytes = value.as(Double.self) {
                                 Text(formatBytes(Int64(bytes)))
-                                    .font(.system(size: 10))
+                                    .font(.system(size: 10, weight: .medium))
                                     .foregroundStyle(Theme.text3)
                             }
                         } else {
                             if let count = value.as(Double.self) {
                                 Text(formatCount(count))
-                                    .font(.system(size: 10))
+                                    .font(.system(size: 10, weight: .medium))
                                     .foregroundStyle(Theme.text3)
                             }
                         }
@@ -66,19 +76,23 @@ struct SizeDistributionChart: View {
             .chartXAxis {
                 AxisMarks { _ in
                     AxisValueLabel()
-                        .font(.system(size: 10))
+                        .font(.system(size: 10, weight: .medium))
                         .foregroundStyle(Theme.text3)
                 }
             }
-            .chartLegend(position: .bottom, alignment: .leading, spacing: 12)
-            .frame(height: 200)
-            .padding(20)
-            .background(Theme.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 14))
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .strokeBorder(Theme.border, lineWidth: 1)
-            )
+            .chartLegend {
+                HStack(spacing: 16) {
+                    HStack(spacing: 4) {
+                        Circle().fill(Theme.eosinePink).frame(width: 8, height: 8)
+                        Text("Photos").font(.system(size: 11, weight: .medium)).foregroundStyle(Theme.text2)
+                    }
+                    HStack(spacing: 4) {
+                        Circle().fill(Theme.neutralGray).frame(width: 8, height: 8)
+                        Text("Videos").font(.system(size: 11, weight: .medium)).foregroundStyle(Theme.text2)
+                    }
+                }
+            }
+            .frame(height: 180)
             .animation(.default, value: chartMetric)
             .animation(.default, value: animateChart)
             .onAppear {
@@ -87,6 +101,12 @@ struct SizeDistributionChart: View {
                 }
             }
         }
+        .surfaceCard()
+    }
+
+    private var bucketTotals: [String: Double] {
+        Dictionary(grouping: chartDataPoints, by: \.bucket)
+            .mapValues { $0.reduce(0) { $0 + $1.value } }
     }
 
     private var chartDataPoints: [ChartDataPoint] {
@@ -108,12 +128,6 @@ struct SizeDistributionChart: View {
         }
     }
 
-    private func formatBytes(_ bytes: Int64) -> String {
-        let formatter = ByteCountFormatter()
-        formatter.countStyle = .file
-        return formatter.string(fromByteCount: bytes)
-    }
-
     private func formatCount(_ value: Double) -> String {
         let intValue = Int(value)
         if intValue >= 1_000_000 {
@@ -126,7 +140,7 @@ struct SizeDistributionChart: View {
 }
 
 private struct ChartDataPoint: Identifiable {
-    let id = UUID()
+    var id: String { "\(bucket)-\(mediaType)" }
     let bucket: String
     let mediaType: String
     let value: Double

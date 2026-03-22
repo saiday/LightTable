@@ -6,7 +6,6 @@ struct ContentView: View {
     @State private var categories: [AlbumCategory] = []
     @State private var errorMessage: String?
     @State private var showSuccess = false
-    @State private var showContent = false
 
     private var hasResults: Bool {
         photoService.scanResult != nil
@@ -44,10 +43,10 @@ struct ContentView: View {
             Spacer(minLength: 100)
             Image(systemName: "photo.on.rectangle.angled")
                 .font(.system(size: 48))
-                .foregroundStyle(Theme.text3)
+                .foregroundStyle(Theme.text2)
             Text("Sort your Photos library by size")
                 .font(.title3)
-                .foregroundStyle(Theme.text2)
+                .foregroundStyle(Theme.text1)
             Button("Scan Library") {
                 Task { await startScan() }
             }
@@ -64,7 +63,7 @@ struct ContentView: View {
 
     private var scrollableContent: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
                 if let error = errorMessage {
                     errorSection(error)
                 }
@@ -78,25 +77,9 @@ struct ContentView: View {
                         emptyLibrarySection
                     } else {
                         let summary = result.summary()
-                        heroSection(summary)
-                            .opacity(showContent ? 1 : 0)
-                            .offset(y: showContent ? 0 : 10)
-                            .animation(.default, value: showContent)
-
                         statPillsSection(summary)
-                            .opacity(showContent ? 1 : 0)
-                            .offset(y: showContent ? 0 : 10)
-                            .animation(.default.delay(0.05), value: showContent)
-
                         chartSection(result)
-                            .opacity(showContent ? 1 : 0)
-                            .offset(y: showContent ? 0 : 10)
-                            .animation(.default.delay(0.1), value: showContent)
-
                         albumSection
-                            .opacity(showContent ? 1 : 0)
-                            .offset(y: showContent ? 0 : 10)
-                            .animation(.default.delay(0.15), value: showContent)
                     }
                 }
 
@@ -104,7 +87,7 @@ struct ContentView: View {
                     successSection
                 }
             }
-            .padding(EdgeInsets(top: 28, leading: 32, bottom: 32, trailing: 32))
+            .padding(EdgeInsets(top: 24, leading: 32, bottom: 32, trailing: 32))
         }
         .background(Theme.bg)
     }
@@ -120,10 +103,7 @@ struct ContentView: View {
                 .foregroundStyle(Theme.text2)
         }
         .frame(maxWidth: .infinity)
-        .padding(20)
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
+        .surfaceCard()
     }
 
     // MARK: - Error
@@ -139,10 +119,7 @@ struct ContentView: View {
             .buttonStyle(.borderless)
         }
         .frame(maxWidth: .infinity)
-        .padding(20)
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
+        .surfaceCard()
     }
 
     // MARK: - Scanning
@@ -161,37 +138,7 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(20)
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
-    }
-
-    // MARK: - Hero Stat
-
-    private func heroSection(_ summary: ScanSummary) -> some View {
-        let sizeString = formatBytes(summary.totalSize)
-        let parts = sizeString.split(separator: " ", maxSplits: 1)
-        let number = String(parts.first ?? "0")
-        let unit = parts.count > 1 ? String(parts.last!) : ""
-
-        return VStack(spacing: 4) {
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(number)
-                    .font(.system(size: 52, weight: .heavy))
-                    .tracking(-2.5)
-                Text(unit)
-                    .font(.system(size: 28, weight: .heavy))
-            }
-            .foregroundStyle(Theme.text1)
-            .monospacedDigit()
-            Text("LIBRARY SIZE")
-                .font(.system(size: 11))
-                .tracking(1.5)
-                .foregroundStyle(Theme.text3)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .surfaceCard()
     }
 
     // MARK: - Stat Pills
@@ -199,49 +146,40 @@ struct ContentView: View {
     private func statPillsSection(_ summary: ScanSummary) -> some View {
         HStack(spacing: 12) {
             statPill(
+                value: formatBytes(summary.totalSize),
+                label: "LIBRARY SIZE",
+                detail: nil
+            )
+            statPill(
                 value: "\(summary.totalImages)",
                 label: "PHOTOS",
-                detail: summary.averageMegapixels > 0 ? "avg \(String(format: "%.1f", summary.averageMegapixels)) MP" : nil,
-                accentColor: Theme.helvetiaBlue
+                detail: summary.averageMegapixels > 0 ? "avg \(String(format: "%.1f", summary.averageMegapixels)) MP" : nil
             )
             statPill(
                 value: "\(summary.totalVideos)",
                 label: "VIDEOS",
-                detail: summary.totalVideoDuration > 0 ? "\(formatDuration(summary.totalVideoDuration)) total" : nil,
-                accentColor: Theme.dullCitrine
+                detail: summary.totalVideoDuration > 0 ? "\(formatDuration(summary.totalVideoDuration)) total" : nil
             )
         }
     }
 
-    private func statPill(value: String, label: String, detail: String?, accentColor: Color) -> some View {
+    private func statPill(value: String, label: String, detail: String?) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(value)
                 .font(.system(size: 26, weight: .bold))
                 .monospacedDigit()
                 .foregroundStyle(Theme.text1)
             Text(label)
-                .font(.system(size: 11))
+                .font(.system(size: 11, weight: .medium))
                 .tracking(0.5)
                 .foregroundStyle(Theme.text2)
-            if let detail {
-                Text(detail)
-                    .font(.system(size: 11))
-                    .foregroundStyle(Theme.text3)
-                    .padding(.top, 2)
-            }
+            Text(detail ?? " ")
+                .font(.system(size: 11))
+                .foregroundStyle(detail != nil ? Theme.text3 : .clear)
+                .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(top: 16, leading: 18, bottom: 16, trailing: 18))
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(alignment: .top) {
-            accentColor.frame(height: 2)
-                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 14, topTrailingRadius: 14))
-        }
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(Theme.border, lineWidth: 1)
-        )
+        .surfaceCard(padding: EdgeInsets(top: 14, leading: 16, bottom: 14, trailing: 16))
     }
 
     // MARK: - Chart
@@ -256,14 +194,14 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("ALBUMS TO CREATE")
                 .font(.system(size: 13, weight: .semibold))
-                .tracking(0.5)
+                .tracking(0.8)
                 .foregroundStyle(Theme.text2)
 
             VStack(spacing: 0) {
                 ForEach($categories) { $category in
                     HStack(spacing: 12) {
                         RoundedRectangle(cornerRadius: 2)
-                            .fill(category.name.contains("Video") ? Theme.dullCitrine : Theme.helvetiaBlue)
+                            .fill(category.id == "videos-by-size" ? Theme.neutralGray : Theme.eosinePink)
                             .frame(width: 3, height: 28)
 
                         VStack(alignment: .leading, spacing: 2) {
@@ -287,17 +225,12 @@ struct ContentView: View {
 
                     if category.id != categories.last?.id {
                         Divider()
-                            .background(Color.white.opacity(0.04))
+                            .overlay(Theme.border)
                             .padding(.leading, 33)
                     }
                 }
             }
-            .background(Theme.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 14))
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .strokeBorder(Theme.border, lineWidth: 1)
-            )
+            .surfaceCard(padding: .init(top: 0, leading: 0, bottom: 0, trailing: 0))
 
             HStack {
                 Spacer()
@@ -348,10 +281,7 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(20)
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Theme.border, lineWidth: 1))
+        .surfaceCard()
     }
 
     // MARK: - Actions
@@ -359,14 +289,12 @@ struct ContentView: View {
     private func startScan() async {
         errorMessage = nil
         showSuccess = false
-        showContent = false
         do {
             try await photoService.scan()
             if let result = photoService.scanResult {
                 withAnimation(.default) {
                     categories = result.albumCategories()
                 }
-                showContent = true
             }
         } catch {
             errorMessage = error.localizedDescription
@@ -385,19 +313,4 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - Helpers
-
-    private func formatBytes(_ bytes: Int64) -> String {
-        let formatter = ByteCountFormatter()
-        formatter.countStyle = .file
-        return formatter.string(fromByteCount: bytes)
-    }
-
-    private func formatDuration(_ seconds: TimeInterval) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = .dropLeading
-        return formatter.string(from: seconds) ?? ""
-    }
 }

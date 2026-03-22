@@ -5,7 +5,7 @@ struct LightTableApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.light)
         }
         .defaultSize(width: 800, height: 900)
         .windowResizability(.contentMinSize)
