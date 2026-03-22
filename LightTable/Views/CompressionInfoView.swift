@@ -58,6 +58,9 @@ struct CompressionInfoView: View {
             Text("Our Shortcut converts photos to HEIF at up to 24 MP — smaller files, nearly identical quality. Originals go to Recently Deleted for 30 days.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
+            Text("Note: Compressed photos may appear at today's date in your timeline.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
     }
 
