@@ -1,15 +1,18 @@
 # Light Table
 
-A macOS app that scans your Apple Photos library and shows which photos take up the most space — so you can reclaim storage.
+Light Table scans your Photos library and shows which photos take up the most space — sorted by size, finally — so you can reclaim storage on both your Mac and iCloud.
+
+I built this app for myself.
 
 [![Download DMG](https://img.shields.io/github/v/release/saiday/LightTable?label=Download%20DMG&style=for-the-badge)](https://github.com/saiday/LightTable/releases/latest/download/LightTable.dmg)
 
-## Features
+<p align="center">
+  <img src="docs/screenshots/main.png" width="600" alt="Light Table main window" />
+</p>
 
-- Scans your Photos library and ranks photos by file size
-- Visual size distribution chart
-- Built-in compression shortcut — converts photos to JPEG with minimal quality loss
-- Works with macOS 13+
+<p align="center">
+  <img src="docs/screenshots/albums-created.png" width="600" alt="Albums created with compression shortcut" />
+</p>
 
 ## Install
 
