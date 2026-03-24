@@ -10,11 +10,13 @@
 		027C88BD1CA48480C7CD87A8 /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9649FB52468657C85D76A3 /* ScanResult.swift */; };
 		09D20BC48C23482270843036 /* ScanResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AFB0E7590D947495C4DA99 /* ScanResultTests.swift */; };
 		1F6BE6CAB2E201E0CFE6822D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDB3620C4FA6EEB552C2BA6 /* Theme.swift */; };
+		253A833947714C9D760C2B5A /* AppIcon.svg in Resources */ = {isa = PBXBuildFile; fileRef = 1215860E990142AFF9AC65A8 /* AppIcon.svg */; };
 		39065EE3606E31BD3A124931 /* PhotoLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */; };
 		5E5B8FB0FF9CC8C3338428FF /* LightTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A891A4AD7C64E4621167E6F /* LightTableApp.swift */; };
 		60ADA4F7DB323FD411992F80 /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950C685A000920A9931F07A /* AssetInfo.swift */; };
 		74F95691F522BF06FCD97EC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E203A455E8F3550ABD2FF /* ContentView.swift */; };
 		78E2C9C041E1189162EC1EE4 /* SizeDistributionChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */; };
+		887A27A4B382DA5D927D36DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5A2FF5BB644A73CCA74C847 /* Assets.xcassets */; };
 		B8185FF1A38D1702EC6B5F4E /* LightTableCompress.shortcut in Resources */ = {isa = PBXBuildFile; fileRef = 0E46AE452F0A11E32D839D7F /* LightTableCompress.shortcut */; };
 		F06D2143151002A3351FEE7D /* CompressionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20FC29E1E97C2578C0BCE16 /* CompressionInfoView.swift */; };
 		FEBAF308F22197DC83D54381 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABB5C6502E15DCD4C081E90 /* AlbumService.swift */; };
@@ -33,6 +35,7 @@
 /* Begin PBXFileReference section */
 		0E46AE452F0A11E32D839D7F /* LightTableCompress.shortcut */ = {isa = PBXFileReference; path = LightTableCompress.shortcut; sourceTree = "<group>"; };
 		1194B494B0CE7D59FA2E8639 /* LightTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1215860E990142AFF9AC65A8 /* AppIcon.svg */ = {isa = PBXFileReference; path = AppIcon.svg; sourceTree = "<group>"; };
 		185350B53ECD188ECFFA5563 /* PhotoLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryService.swift; sourceTree = "<group>"; };
 		1950C685A000920A9931F07A /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
 		1BF202A72BA712ADE633053C /* LightTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +48,7 @@
 		C5BCF82B7F5C373D20C1C144 /* SizeDistributionChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDistributionChart.swift; sourceTree = "<group>"; };
 		D20FC29E1E97C2578C0BCE16 /* CompressionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionInfoView.swift; sourceTree = "<group>"; };
 		EDEB5FB02C50877BB59EA235 /* LightTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LightTable.entitlements; sourceTree = "<group>"; };
+		F5A2FF5BB644A73CCA74C847 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEDB3620C4FA6EEB552C2BA6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +56,8 @@
 		03EBE33E42580621064E2D37 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1215860E990142AFF9AC65A8 /* AppIcon.svg */,
+				F5A2FF5BB644A73CCA74C847 /* Assets.xcassets */,
 				2E94049D27F8F4B60476612D /* Info.plist */,
 				0E46AE452F0A11E32D839D7F /* LightTableCompress.shortcut */,
 			);
@@ -201,6 +207,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253A833947714C9D760C2B5A /* AppIcon.svg in Resources */,
+				887A27A4B382DA5D927D36DF /* Assets.xcassets in Resources */,
 				B8185FF1A38D1702EC6B5F4E /* LightTableCompress.shortcut in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

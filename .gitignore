@@ -19,3 +19,7 @@ build/
 
 # Worktrees
 .worktrees/
+
+# Tool artifacts
+.playwright-mcp/
+.superpowers/
