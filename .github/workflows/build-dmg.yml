@@ -1,0 +1,45 @@
+name: Build DMG
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build app
+        run: |
+          xcodebuild archive \
+            -scheme LightTable \
+            -configuration Release \
+            -archivePath "$RUNNER_TEMP/LightTable.xcarchive" \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Export app from archive
+        run: |
+          mkdir -p "$RUNNER_TEMP/app"
+          cp -R "$RUNNER_TEMP/LightTable.xcarchive/Products/Applications/Light Table.app" "$RUNNER_TEMP/app/"
+
+      - name: Create DMG
+        run: |
+          hdiutil create -volname "Light Table" \
+            -srcfolder "$RUNNER_TEMP/app" \
+            -ov -format UDZO \
+            "$RUNNER_TEMP/LightTable.dmg"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ runner.temp }}/LightTable.dmg
+          generate_release_notes: true
