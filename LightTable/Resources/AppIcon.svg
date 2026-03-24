@@ -4,12 +4,9 @@
       <stop offset="0%" stop-color="#F25E6B"/>
       <stop offset="100%" stop-color="#C44B58"/>
     </linearGradient>
-    <clipPath id="clip">
-      <rect width="1024" height="1024" rx="228" ry="228"/>
-    </clipPath>
   </defs>
 
-  <g clip-path="url(#clip)">
+  <g>
     <rect width="1024" height="1024" fill="url(#bg)"/>
 
     <g transform="translate(512, 512)">
