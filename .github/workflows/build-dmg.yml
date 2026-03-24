@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: macos-15
@@ -24,12 +27,13 @@ jobs:
             -configuration Release \
             -derivedDataPath "$RUNNER_TEMP/DerivedData" \
             CODE_SIGN_IDENTITY="-" \
-            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_ALLOWED=YES
 
       - name: Prepare app for DMG
         run: |
           mkdir -p "$RUNNER_TEMP/app"
           cp -R "$RUNNER_TEMP/DerivedData/Build/Products/Release/Light Table.app" "$RUNNER_TEMP/app/"
+          ln -s /Applications "$RUNNER_TEMP/app/Applications"
 
       - name: Create DMG
         run: |
