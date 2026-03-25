@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light Table — Sort your Photos library by size</title>
+  <meta name="description" content="Light Table scans your Photos library and shows which photos take up the most space, sorted by size. Reclaim storage on your Mac and iCloud.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1d1d1f;
+      background: #fff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 48px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero .tagline {
+      font-size: 20px;
+      color: #6e6e73;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #007aff;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #0066d6;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      color: #007aff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      margin-left: 16px;
+    }
+
+    .btn-secondary:hover {
+      text-decoration: underline;
+    }
+
+    /* Screenshots */
+    .screenshot {
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    .screenshot img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Why section */
+    .why {
+      padding: 64px 0;
+    }
+
+    .why h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    .why p {
+      font-size: 18px;
+      color: #1d1d1f;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    /* Bottom CTA */
+    .cta {
+      text-align: center;
+      padding: 48px 0 80px;
+    }
+
+    .cta .links {
+      margin-top: 16px;
+    }
+
+    .cta .links a {
+      color: #6e6e73;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .cta .links a:hover {
+      color: #1d1d1f;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid #e5e5e5;
+      color: #6e6e73;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #6e6e73;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #1d1d1f;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 48px 0 32px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero .tagline {
+        font-size: 17px;
+      }
+
+      .why h2 {
+        font-size: 26px;
+      }
+
+      .why p {
+        font-size: 16px;
+      }
+
+      .btn-secondary {
+        display: block;
+        margin: 16px 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <section class="hero">
+      <h1>Light Table</h1>
+      <p class="tagline">Scan your Photos library. See what's taking up space. Sorted by size — finally.</p>
+      <a href="https://github.com/saiday/LightTable/releases/latest/download/LightTable.dmg" class="btn">Download for Mac</a>
+      <a href="https://github.com/saiday/LightTable" class="btn-secondary">View on GitHub</a>
+    </section>
+
+    <section class="screenshot">
+      <img src="screenshots/main.png" alt="Light Table main window showing library size breakdown and size distribution chart">
+    </section>
+
+    <section class="why">
+      <h2>Why we needed this</h2>
+      <p>Apple won't let you sort photos by file size. Not in Photos. Not in iCloud. There is no way to know which files are eating your storage — unless you upgrade to a bigger iCloud plan.</p>
+      <p>That's not a missing feature. That's a business model.</p>
+      <p>Light Table breaks that asymmetry. It reads your Photos library, shows you exactly where your gigabytes went, and creates smart albums so you can delete or compress the biggest offenders — right from Photos.app.</p>
+      <p>The power asymmetry is over.</p>
+    </section>
+
+    <section class="screenshot">
+      <img src="screenshots/albums-created.png" alt="Albums created in Photos with compression shortcut option">
+    </section>
+
+    <section class="cta">
+      <a href="https://github.com/saiday/LightTable/releases/latest/download/LightTable.dmg" class="btn">Download for Mac</a>
+      <div class="links">
+        <a href="https://github.com/saiday/LightTable">GitHub</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <a href="https://github.com/saiday/LightTable">Light Table</a> — free and open source
+    </div>
+  </footer>
+
+</body>
+</html>
